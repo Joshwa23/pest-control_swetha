@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now - GreenGuard Pest Control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --primary-light: #10b981;
+            --primary-lighter: #d1fae5;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+            --danger: #ef4444;
+            --danger-light: #fee2e2;
+            --dark: #0f172a;
+            --darker: #020617;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 6px 12px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --shadow-glow: 0 0 20px rgba(5, 150, 105, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--gray-50);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ==================== LOADER ==================== */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid var(--gray-200);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-700);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .phone-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--gray-100);
+            color: var(--gray-800);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: 2px solid var(--gray-200);
+        }
+
+        .phone-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-lg {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-xl {
+            padding: 1.25rem 2.5rem;
+            font-size: 1.25rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.5);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #fbbf24);
+            color: var(--dark);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            font-weight: 700;
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-700);
+            cursor: pointer;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            min-height: 50vh;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, var(--primary-dark) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(5, 150, 105, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent), #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+        }
+
+        .hero-feature i {
+            color: var(--accent);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+        .main-content {
+            max-width: 1400px;
+            margin: -4rem auto 0;
+            padding: 0 2rem 4rem;
+            position: relative;
+            z-index: 20;
+        }
+
+        .booking-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* ==================== SIDEBAR INFO ==================== */
+        .info-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .info-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-lighter), var(--primary-light));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+
+        .info-card p {
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .contact-list li:last-child {
+            border-bottom: none;
+        }
+
+        .contact-list li i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--gray-50);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: var(--gray-700);
+        }
+
+        .trust-badge i {
+            color: var(--accent);
+        }
+
+        /* ==================== BOOKING FORM ==================== */
+        .booking-form-container {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-2xl);
+            border: 1px solid var(--gray-200);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: var(--gray-600);
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gray-200);
+            z-index: 0;
+        }
+
+        .progress-fill {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            z-index: 1;
+            transition: width 0.5s ease;
+        }
+
+        .step-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--gray-500);
+            transition: all 0.3s;
+        }
+
+        .step-indicator.active .step-number,
+        .step-indicator.completed .step-number {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .step-indicator.completed .step-number {
+            background: var(--primary);
+        }
+
+        .step-indicator.completed .step-number::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+        }
+
+        .step-indicator.completed .step-number span {
+            display: none;
+        }
+
+        .step-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-500);
+        }
+
+        .step-indicator.active .step-label {
+            color: var(--primary);
+        }
+
+        /* Form Steps */
+        .form-step {
+            display: none;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 0.95rem;
+        }
+
+        .form-label span {
+            color: var(--danger);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: var(--gray-50);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+        }
+
+        .form-input.error {
+            border-color: var(--danger);
+            background: var(--danger-light);
+        }
+
+        .form-input.success {
+            border-color: var(--primary);
+            background: var(--primary-lighter);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-400);
+            font-size: 1.1rem;
+        }
+
+        .form-input:focus + .input-icon {
+            color: var(--primary);
+        }
+
+        .error-message {
+            display: none;
+            color: var(--danger);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        /* Service Selection */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .service-option {
+            position: relative;
+            padding: 1.5rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .service-option:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-option.selected {
+            border-color: var(--primary);
+            background: var(--primary-lighter);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .service-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .service-option.selected .service-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .service-name {
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.25rem;
+        }
+
+        .service-price {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .service-check {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--gray-300);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .service-option.selected .service-check {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Date Picker */
+        .date-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .date-cell {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.875rem;
+        }
+
+        .date-cell:hover:not(.disabled) {
+            border-color: var(--primary);
+            background: var(--primary-lighter);
+        }
+
+        .date-cell.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .date-cell.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: var(--gray-100);
+        }
+
+        .date-cell .day-name {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .date-cell .day-num {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* Time Slots */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .time-slot {
+            padding: 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .time-slot:hover:not(.disabled) {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .time-slot.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .time-slot.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        /* Form Navigation */
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--gray-100);
+        }
+
+        .btn-prev {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .btn-prev:hover {
+            background: var(--gray-200);
+        }
+
+        /* Summary */
+        .summary-card {
+            background: var(--gray-50);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .summary-title i {
+            color: var(--primary);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-top: 0.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--gray-300);
+        }
+
+        .summary-label {
+            color: var(--gray-600);
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-method {
+            flex: 1;
+            padding: 1.5rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-light);
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary);
+            background: var(--primary-lighter);
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--gray-600);
+        }
+
+        .payment-method.selected i {
+            color: var(--primary);
+        }
+
+        .payment-method span {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        /* Success State */
+        .success-state {
+            text-align: center;
+            padding: 3rem;
+            display: none;
+        }
+
+        .success-state.show {
+            display: block;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: white;
+            font-size: 3rem;
+            box-shadow: var(--shadow-glow);
+            animation: bounce 1s ease-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        .success-state h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+        }
+
+        .success-state p {
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .booking-reference {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--gray-100);
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-2xl);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateX(400px);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1001;
+            max-width: 400px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .toast-icon.success {
+            background: var(--primary-lighter);
+            color: var(--primary);
+        }
+
+        .toast-icon.error {
+            background: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .toast-content h4 {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--gray-800);
+        }
+
+        .toast-content p {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--gray-200);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .info-sidebar {
+                order: 2;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-grid,
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .booking-form-container {
+                padding: 1.5rem;
+            }
+
+            .date-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .payment-methods {
+                flex-direction: column;
+            }
+
+            .form-navigation {
+                flex-direction: column-reverse;
+                gap: 1rem;
+            }
+
+            .btn-prev,
+            .btn-primary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Loading Booking System...</div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon success" id="toastIcon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="toast-content">
+            <h4 id="toastTitle">Success!</h4>
+            <p id="toastMessage">Operation completed successfully.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="pest.html" class="nav-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>GreenGuard</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="pest.html#home">Home</a></li>
+                <li><a href="pest.html#services">Services</a></li>
+                <li><a href="pest.html#process">Process</a></li>
+                <li><a href="pest.html#pricing">Pricing</a></li>
+            </ul>
+
+            <div class="nav-cta">
+                <a href="tel:5551234567" class="phone-btn">
+                    <i class="fas fa-phone"></i>
+                    <span>(555) 123-4567</span>
+                </a>
+                <a href="book.html" class="btn btn-primary">
+                    <i class="fas fa-calendar"></i> Book Now
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-particles" id="heroParticles"></div>
+        
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i>
+                Quick & Easy Booking
+            </div>
+            <h1>
+                Book Your <span>Pest Control</span><br>
+                Service Online
+            </h1>
+            <p class="hero-subtitle">
+                Schedule your appointment in 3 simple steps. Same-day service available for emergencies.
+            </p>
+            <div class="hero-features">
+                <div class="hero-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Instant Confirmation</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Free Cancellation</span>
+                </div>
+                <div class="hero-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Secure Payment</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="booking-container">
+            <!-- Sidebar Info -->
+            <aside class="info-sidebar">
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Working Hours</h3>
+                    </div>
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fas fa-calendar-day"></i>
+                            <div>
+                                <strong>Monday - Friday</strong><br>
+                                <span style="color: var(--gray-500);">8:00 AM - 6:00 PM</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-calendar-weekend"></i>
+                            <div>
+                                <strong>Saturday</strong><br>
+                                <span style="color: var(--gray-500);">9:00 AM - 4:00 PM</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div>
+                                <strong>Emergency Service</strong><br>
+                                <span style="color: var(--primary); font-weight: 600;">24/7 Available</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <div class="info-icon" style="background: var(--accent-light); color: var(--accent);">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3>Need Help?</h3>
+                    </div>
+                    <p>Our team is ready to assist you with any questions about our services or booking process.</p>
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>(555) 123-4567</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>bookings@greenguard.com</span>
+                        </li>
+                    </ul>
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Licensed</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i class="fas fa-star"></i>
+                            <span>4.9 Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-card-header">
+                        <div class="info-icon" style="background: linear-gradient(135deg, #dbeafe, #3b82f6); color: #1d4ed8;">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <h3>Current Offers</h3>
+                    </div>
+                    <div style="padding: 1rem; background: var(--accent-light); border-radius: 12px; margin-bottom: 1rem;">
+                        <div style="font-weight: 700; color: var(--accent); margin-bottom: 0.25rem;">
+                            <i class="fas fa-percentage"></i> NEWCUSTOMER
+                        </div>
+                        <p style="font-size: 0.875rem; color: var(--gray-700); margin: 0;">
+                            20% off your first booking!
+                        </p>
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin: 0;">
+                        *Discount applied automatically at checkout
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Booking Form -->
+            <div class="booking-form-container">
+                <div class="form-header">
+                    <h2>Schedule Your Service</h2>
+                    <p>Fill in your details and preferred time slot</p>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 33%;"></div>
+                    <div class="step-indicator active" data-step="1">
+                        <div class="step-number"><span>1</span></div>
+                        <span class="step-label">Your Info</span>
+                    </div>
+                    <div class="step-indicator" data-step="2">
+                        <div class="step-number"><span>2</span></div>
+                        <span class="step-label">Service</span>
+                    </div>
+                    <div class="step-indicator" data-step="3">
+                        <div class="step-number"><span>3</span></div>
+                        <span class="step-label">Schedule</span>
+                    </div>
+                    <div class="step-indicator" data-step="4">
+                        <div class="step-number"><span>4</span></div>
+                        <span class="step-label">Confirm</span>
+                    </div>
+                </div>
+
+                <!-- Form Steps -->
+                <form id="bookingForm">
+                    <!-- Step 1: Personal Info -->
+                    <div class="form-step active" data-step="1">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">First Name <span>*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" class="form-input" id="firstName" placeholder="John" required>
+                                </div>
+                                <div class="error-message" id="firstNameError">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Please enter your first name</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Last Name <span>*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" class="form-input" id="lastName" placeholder="Doe" required>
+                                </div>
+                                <div class="error-message" id="lastNameError">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Please enter your last name</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Email Address <span>*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-envelope input-icon"></i>
+                                    <input type="email" class="form-input" id="email" placeholder="john@example.com" required>
+                                </div>
+                                <div class="error-message" id="emailError">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Please enter a valid email</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Phone Number <span>*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-phone input-icon"></i>
+                                    <input type="tel" class="form-input" id="phone" placeholder="(555) 123-4567" required>
+                                </div>
+                                <div class="error-message" id="phoneError">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Please enter a valid phone number</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label class="form-label">Address <span>*</span></label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-map-marker-alt input-icon"></i>
+                                    <input type="text" class="form-input" id="address" placeholder="123 Green Street, Austin, TX 78701" required>
+                                </div>
+                                <div class="error-message" id="addressError">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>Please enter your address</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label class="form-label">Additional Notes (Optional)</label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-comment input-icon" style="top: 1rem; transform: none;"></i>
+                                    <textarea class="form-input" id="notes" rows="3" placeholder="Describe your pest problem, preferred entry instructions, etc..." style="padding-top: 1rem;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <div></div>
+                            <button type="button" class="btn btn-primary btn-lg" onclick="nextStep(1)">
+                                Continue <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Service Selection -->
+                    <div class="form-step" data-step="2">
+                        <div class="form-group full-width">
+                            <label class="form-label">Select Service <span>*</span></label>
+                            <div class="service-grid">
+                                <label class="service-option" onclick="selectService(this, 'termite', '$199')">
+                                    <input type="radio" name="service" value="termite">
+                                    <div class="service-check"><i class="fas fa-check"></i></div>
+                                    <div class="service-icon"><i class="fas fa-bug"></i></div>
+                                    <div class="service-name">Termite Control</div>
+                                    <div class="service-price">From $199</div>
+                                </label>
+
+                                <label class="service-option" onclick="selectService(this, 'cockroach', '$149')">
+                                    <input type="radio" name="service" value="cockroach">
+                                    <div class="service-check"><i class="fas fa-check"></i></div>
+                                    <div class="service-icon"><i class="fas fa-cockroach"></i></div>
+                                    <div class="service-name">Cockroach Control</div>
+                                    <div class="service-price">From $149</div>
+                                </label>
+
+                                <label class="service-option" onclick="selectService(this, 'mosquito', '$89')">
+                                    <input type="radio" name="service" value="mosquito">
+                                    <div class="service-check"><i class="fas fa-check"></i></div>
+                                    <div class="service-icon"><i class="fas fa-mosquito"></i></div>
+                                    <div class="service-name">Mosquito Control</div>
+                                    <div class="service-price">From $89</div>
+                                </label>
+
+                                <label class="service-option" onclick="selectService(this, 'rodent', '$179')">
+                                    <input type="radio" name="service" value="rodent">
+                                    <div class="service-check"><i class="fas fa-check"></i></div>
+                                    <div class="service-icon"><i class="fas fa-mouse"></i></div>
+                                    <div class="service-name">Rodent Control</div>
+                                    <div class="service-price">From $179</div>
+                                </label>
+
+                                <label class="service-option" onclick="selectService(this, 'spider', '$129')">
+                                    <input type="radio" name="service" value="spider">
+                                    <div class="service-check"><i class="fas fa-check"></i></div>
+                                    <div class="service-icon"><i class="fas fa-spider"></i></div>
+                                    <div class="service-name">Spider Control</div>
+                                    <div class="service-price">From $129</div>
+                                </label>
+
+                                <label class="service-option" onclick="selectService(this, 'full', '$399')">
+                                    <input type="radio" name="service" value="full">
+                                    <div class="service-check"><i class="fas fa-check"></i></div>
+                                    <div class="service-icon"><i class="fas fa-home"></i></div>
+                                    <div class="service-name">Full Home Protection</div>
+                                    <div class="service-price">$399/year</div>
+                                </label>
+                            </div>
+                            <div class="error-message" id="serviceError" style="margin-top: 1rem;">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>Please select a service</span>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-prev btn-lg" onclick="prevStep(2)">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg" onclick="nextStep(2)">
+                                Continue <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Schedule -->
+                    <div class="form-step" data-step="3">
+                        <div class="form-group full-width">
+                            <label class="form-label">Select Date <span>*</span></label>
+                            <div class="date-grid" id="dateGrid">
+                                <!-- Generated by JS -->
+                            </div>
+                            <input type="hidden" id="selectedDate" required>
+                            <div class="error-message" id="dateError" style="margin-top: 1rem;">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>Please select a date</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width" style="margin-top: 2rem;">
+                            <label class="form-label">Select Time <span>*</span></label>
+                            <div class="time-slots" id="timeSlots">
+                                <div class="time-slot" data-time="09:00">9:00 AM</div>
+                                <div class="time-slot" data-time="11:00">11:00 AM</div>
+                                <div class="time-slot" data-time="13:00">1:00 PM</div>
+                                <div class="time-slot" data-time="15:00">3:00 PM</div>
+                                <div class="time-slot" data-time="17:00">5:00 PM</div>
+                                <div class="time-slot disabled">Booked</div>
+                            </div>
+                            <input type="hidden" id="selectedTime" required>
+                            <div class="error-message" id="timeError" style="margin-top: 1rem;">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>Please select a time slot</span>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-prev btn-lg" onclick="prevStep(3)">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg" onclick="nextStep(3)">
+                                Continue <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Confirmation -->
+                    <div class="form-step" data-step="4">
+                        <div class="summary-card">
+                            <h3 class="summary-title">
+                                <i class="fas fa-clipboard-list"></i>
+                                Booking Summary
+                            </h3>
+                            <div class="summary-row">
+                                <span class="summary-label">Service</span>
+                                <span class="summary-value" id="summaryService">-</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Date & Time</span>
+                                <span class="summary-value" id="summaryDateTime">-</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Customer</span>
+                                <span class="summary-value" id="summaryCustomer">-</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Address</span>
+                                <span class="summary-value" id="summaryAddress">-</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Subtotal</span>
+                                <span class="summary-value" id="summaryPrice">-</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Discount (NEWCUSTOMER)</span>
+                                <span class="summary-value" style="color: var(--accent);">-20%</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Total</span>
+                                <span class="summary-value" id="summaryTotal" style="color: var(--primary); font-size: 1.5rem;">-</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Payment Method <span>*</span></label>
+                            <div class="payment-methods">
+                                <div class="payment-method selected" onclick="selectPayment(this)">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Credit Card</span>
+                                </div>
+                                <div class="payment-method" onclick="selectPayment(this)">
+                                    <i class="fab fa-paypal"></i>
+                                    <span>PayPal</span>
+                                </div>
+                                <div class="payment-method" onclick="selectPayment(this)">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <span>Cash on Site</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+                                <input type="checkbox" id="terms" style="width: 20px; height: 20px; accent-color: var(--primary);" required>
+                                <span style="color: var(--gray-700); font-size: 0.95rem;">
+                                    I agree to the <a href="#" style="color: var(--primary);">Terms of Service</a> and <a href="#" style="color: var(--primary);">Privacy Policy</a>
+                                </span>
+                            </label>
+                            <div class="error-message" id="termsError">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span>Please accept the terms</span>
+                            </div>
+                        </div>
+
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-prev btn-lg" onclick="prevStep(4)">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <button type="button" class="btn btn-accent btn-xl" onclick="submitBooking()">
+                                <i class="fas fa-lock"></i> Confirm & Pay
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Success State -->
+                <div class="success-state" id="successState">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h2>Booking Confirmed!</h2>
+                    <p>Your appointment has been scheduled. We've sent a confirmation email with all the details.</p>
+                    <div class="booking-reference" id="bookingRef">GG-2024-78432</div>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="pest.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-home"></i> Back to Home
+                        </a>
+                        <button class="btn btn-outline btn-lg" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print Receipt
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Global variables
+        let currentStep = 1;
+        let selectedService = null;
+        let selectedServicePrice = 0;
+        let bookingData = {};
+
+        // Initialize
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('pageLoader').classList.add('hidden');
+            }, 1000);
+            
+            generateDates();
+            initTimeSlots();
+            createParticles();
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const container = document.getElementById('heroParticles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Generate calendar dates
+        function generateDates() {
+            const grid = document.getElementById('dateGrid');
+            const today = new Date();
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            
+            for (let i = 0; i < 14; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                
+                const cell = document.createElement('div');
+                cell.className = 'date-cell' + (i === 0 ? ' selected' : '');
+                if (i < 2) cell.classList.add('disabled');
+                
+                cell.innerHTML = `
+                    <span class="day-name">${days[date.getDay()]}</span>
+                    <span class="day-num">${date.getDate()}</span>
+                `;
+                
+                cell.onclick = () => {
+                    if (cell.classList.contains('disabled')) return;
+                    document.querySelectorAll('.date-cell').forEach(c => c.classList.remove('selected'));
+                    cell.classList.add('selected');
+                    document.getElementById('selectedDate').value = date.toISOString().split('T')[0];
+                    document.getElementById('dateError').classList.remove('show');
+                };
+                
+                grid.appendChild(cell);
+            }
+            
+            // Select day after tomorrow by default
+            if (grid.children[2]) {
+                grid.children[2].click();
+            }
+        }
+
+        // Initialize time slots
+        function initTimeSlots() {
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                if (!slot.classList.contains('disabled')) {
+                    slot.onclick = () => {
+                        document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                        slot.classList.add('selected');
+                        document.getElementById('selectedTime').value = slot.dataset.time;
+                        document.getElementById('timeError').classList.remove('show');
+                    };
+                }
+            });
+        }
+
+        // Select service
+        function selectService(element, service, price) {
+            document.querySelectorAll('.service-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+            
+            selectedService = service;
+            selectedServicePrice = parseInt(price.replace('$', '').replace('/year', ''));
+            document.getElementById('serviceError').classList.remove('show');
+            
+            // Update summary
+            const serviceNames = {
+                'termite': 'Termite Control',
+                'cockroach': 'Cockroach Control',
+                'mosquito': 'Mosquito Control',
+                'rodent': 'Rodent Control',
+                'spider': 'Spider Control',
+                'full': 'Full Home Protection'
+            };
+            
+            bookingData.service = serviceNames[service];
+            bookingData.price = selectedServicePrice;
+        }
+
+        // Select payment method
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        // Navigation functions
+        function nextStep(step) {
+            if (!validateStep(step)) return;
+            
+            // Save data
+            saveStepData(step);
+            
+            // Update UI
+            document.querySelector(`.form-step[data-step="${step}"]`).classList.remove('active');
+            document.querySelector(`.form-step[data-step="${step + 1}"]`).classList.add('active');
+            
+            document.querySelector(`.step-indicator[data-step="${step}"]`).classList.add('completed');
+            document.querySelector(`.step-indicator[data-step="${step}"]`).classList.remove('active');
+            document.querySelector(`.step-indicator[data-step="${step + 1}"]`).classList.add('active');
+            
+            // Update progress
+            const progress = ((step + 1) / 4) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            currentStep = step + 1;
+            
+            // Update summary if going to step 4
+            if (currentStep === 4) {
+                updateSummary();
+            }
+        }
+
+        function prevStep(step) {
+            document.querySelector(`.form-step[data-step="${step}"]`).classList.remove('active');
+            document.querySelector(`.form-step[data-step="${step - 1}"]`).classList.add('active');
+            
+            document.querySelector(`.step-indicator[data-step="${step - 1}"]`).classList.remove('completed');
+            document.querySelector(`.step-indicator[data-step="${step}"]`).classList.remove('active');
+            document.querySelector(`.step-indicator[data-step="${step - 1}"]`).classList.add('active');
+            
+            const progress = ((step - 1) / 4) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            
+            currentStep = step - 1;
+        }
+
+        // Validation
+        function validateStep(step) {
+            let isValid = true;
+            
+            if (step === 1) {
+                const fields = ['firstName', 'lastName', 'email', 'phone', 'address'];
+                fields.forEach(field => {
+                    const input = document.getElementById(field);
+                    const error = document.getElementById(field + 'Error');
+                    
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('error');
+                        error.classList.add('show');
+                    } else {
+                        // Additional validation
+                        if (field === 'email' && !isValidEmail(input.value)) {
+                            isValid = false;
+                            input.classList.add('error');
+                            error.querySelector('span').textContent = 'Please enter a valid email address';
+                            error.classList.add('show');
+                        } else if (field === 'phone' && !isValidPhone(input.value)) {
+                            isValid = false;
+                            input.classList.add('error');
+                            error.querySelector('span').textContent = 'Please enter a valid phone number';
+                            error.classList.add('show');
+                        } else {
+                            input.classList.remove('error');
+                            input.classList.add('success');
+                            error.classList.remove('show');
+                        }
+                    }
+                });
+            }
+            
+            if (step === 2) {
+                if (!selectedService) {
+                    isValid = false;
+                    document.getElementById('serviceError').classList.add('show');
+                    document.querySelector('.service-grid').classList.add('shake');
+                    setTimeout(() => document.querySelector('.service-grid').classList.remove('shake'), 500);
+                }
+            }
+            
+            if (step === 3) {
+                const date = document.getElementById('selectedDate').value;
+                const time = document.getElementById('selectedTime').value;
+                
+                if (!date) {
+                    isValid = false;
+                    document.getElementById('dateError').classList.add('show');
+                }
+                if (!time) {
+                    isValid = false;
+                    document.getElementById('timeError').classList.add('show');
+                }
+            }
+            
+            return isValid;
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function isValidPhone(phone) {
+            return /^[\d\s\-\+\(\)]{10,}$/.test(phone);
+        }
+
+        // Save step data
+        function saveStepData(step) {
+            if (step === 1) {
+                bookingData.firstName = document.getElementById('firstName').value;
+                bookingData.lastName = document.getElementById('lastName').value;
+                bookingData.email = document.getElementById('email').value;
+                bookingData.phone = document.getElementById('phone').value;
+                bookingData.address = document.getElementById('address').value;
+                bookingData.notes = document.getElementById('notes').value;
+            }
+            if (step === 3) {
+                bookingData.date = document.getElementById('selectedDate').value;
+                bookingData.time = document.getElementById('selectedTime').value;
+            }
+        }
+
+        // Update summary
+        function updateSummary() {
+            document.getElementById('summaryService').textContent = bookingData.service || '-';
+            document.getElementById('summaryDateTime').textContent = 
+                bookingData.date && bookingData.time ? 
+                `${new Date(bookingData.date).toLocaleDateString()} at ${bookingData.time}` : '-';
+            document.getElementById('summaryCustomer').textContent = 
+                `${bookingData.firstName} ${bookingData.lastName}`;
+            document.getElementById('summaryAddress').textContent = bookingData.address;
+            document.getElementById('summaryPrice').textContent = `$${bookingData.price}`;
+            
+            const discount = bookingData.price * 0.2;
+            const total = bookingData.price - discount;
+            document.getElementById('summaryTotal').textContent = `$${total.toFixed(2)}`;
+        }
+
+        // Submit booking
+        function submitBooking() {
+            const terms = document.getElementById('terms');
+            if (!terms.checked) {
+                document.getElementById('termsError').classList.add('show');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loadingOverlay').classList.add('show');
+            
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.remove('show');
+                
+                // Generate booking reference
+                const ref = 'GG-' + new Date().getFullYear() + '-' + Math.floor(Math.random() * 90000 + 10000);
+                document.getElementById('bookingRef').textContent = ref;
+                
+                // Show success
+                document.getElementById('bookingForm').style.display = 'none';
+                document.querySelector('.progress-bar').style.display = 'none';
+                document.querySelector('.form-header').style.display = 'none';
+                document.getElementById('successState').classList.add('show');
+                
+                // Show toast
+                showToast('success', 'Booking Confirmed!', 'Your appointment has been scheduled successfully.');
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 2000);
+        }
+
+        // Toast notification
+        function showToast(type, title, message) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            
+            icon.className = 'toast-icon ' + type;
+            icon.innerHTML = type === 'success' ? '<i class="fas fa-check"></i>' : '<i class="fas fa-exclamation-circle"></i>';
+            
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = message;
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // Real-time validation
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorId = this.id + 'Error';
+                const errorEl = document.getElementById(errorId);
+                if (errorEl) errorEl.classList.remove('show');
+            });
+        });
+
+        // Phone formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 10) {
+                value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
+            }
+            e.target.value = value;
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to { transform: scale(2); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
