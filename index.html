@@ -1310,7 +1310,50 @@
         .scale-in.visible {
             opacity: 1;
             transform: scale(1);
+            
         }
+        /* ==================== VIDEO SECTION ==================== */
+.video-section {
+    background: var(--gray-50);
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.video-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+}
+
+.video-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-2xl);
+}
+
+.video-card iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+}
+
+.video-card h3 {
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+ .video-card iframe {
+    transition: transform 0.4s ease;
+}
+
+.video-card:hover iframe {
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body>
@@ -1773,7 +1816,54 @@
             </div>
         </div>
     </section>
+    <!-- ==================== VIDEO SHOWCASE ==================== -->
+<section class="section video-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">
+                <i class="fas fa-play-circle"></i> Pest Control Videos
+            </span>
+            <h2 class="section-title">Watch Our Pest Control Work</h2>
+            <p class="section-subtitle">
+                Real pest control treatments, termite removal, and cleaning processes.
+            </p>
+        </div>
 
+        <div class="video-grid">
+
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/2y5KzQ3rZ4k" allowfullscreen></iframe>
+                <h3>Termite Treatment Process</h3>
+            </div>
+
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/5F9bFZ0cS_E" allowfullscreen></iframe>
+                <h3>Cockroach Control Spray</h3>
+            </div>
+
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/Yp7wSxXw3x8" allowfullscreen></iframe>
+                <h3>Bed Bug Removal</h3>
+            </div>
+
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/8cQ7xWwZ5s4" allowfullscreen></iframe>
+                <h3>Rodent Control Service</h3>
+            </div>
+
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/W7d1sJcG0rA" allowfullscreen></iframe>
+                <h3>Mosquito Fogging</h3>
+            </div>
+
+            <div class="video-card">
+                <iframe src="https://www.youtube.com/embed/ZlG3wY5xq3k" allowfullscreen></iframe>
+                <h3>Full Home Pest Cleaning</h3>
+            </div>
+
+        </div>
+    </div>
+</section>
     <!-- Testimonials Section -->
     <section class="section" id="testimonials">
         <div class="container">
