@@ -541,103 +541,142 @@
         }
 
         /* ==================== SERVICES SECTION ==================== */
-        /* ==================== SERVICES SECTION - NEW DESIGN ==================== */
+ /* ================= SECTION ================= */
+
+.section {
+    padding: 6rem 0;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(5, 150, 105, 0.1);
+    color: var(--primary);
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--gray-800);
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ================= SERVICES ================= */
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
 /* CARD */
 .service-card {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 1.8rem;
-    border: 1px solid #e5e7eb;
-    transition: all 0.35s ease;
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid #e2e8f0;
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
 }
 
-/* gradient border glow */
+/* glowing overlay */
 .service-card::before {
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: 18px;
-    padding: 1px;
-    background: linear-gradient(120deg, transparent, #10b981, transparent);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+    background: linear-gradient(120deg, transparent, rgba(16,185,129,0.2), transparent);
     opacity: 0;
-    transition: 0.4s;
+    transition: 0.5s;
 }
 
 .service-card:hover::before {
     opacity: 1;
 }
 
-/* hover effect */
+/* hover lift */
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
 }
 
 /* ICON */
 .service-icon-wrap {
-    width: 65px;
-    height: 65px;
-    border-radius: 14px;
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
     background: linear-gradient(135deg, #059669, #10b981);
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
-    color: white;
+    font-size: 1.8rem;
     margin-bottom: 1rem;
-    transition: 0.4s;
+    transition: 0.3s;
 }
 
-/* icon hover */
+/* icon animation */
 .service-card:hover .service-icon-wrap {
-    transform: scale(1.1) rotate(6deg);
+    transform: rotate(8deg) scale(1.1);
 }
 
 /* TITLE */
 .service-card h3 {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    margin-bottom: 0.4rem;
-    color: #1e293b;
+    margin-bottom: 0.5rem;
 }
 
 /* DESCRIPTION */
 .service-card p {
-    font-size: 0.9rem;
-    color: #64748b;
+    font-size: 0.95rem;
+    color: #475569;
     margin-bottom: 1rem;
 }
 
-/* FEATURES (converted look without changing HTML) */
+/* FEATURES */
 .service-features {
-    margin-bottom: 1.2rem;
-    padding: 0;
     list-style: none;
+    margin-bottom: 1.2rem;
 }
 
 .service-features li {
-    display: inline-block;
     background: #f1f5f9;
     padding: 6px 10px;
     border-radius: 8px;
-    font-size: 12px;
-    margin: 4px 4px 0 0;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
     transition: 0.3s;
 }
 
-/* hover chip effect */
+/* hover on features */
 .service-features li:hover {
     background: #e2e8f0;
 }
@@ -645,58 +684,37 @@
 /* icon */
 .service-features li i {
     color: #10b981;
-    margin-right: 4px;
 }
 
 /* PRICE */
 .service-price {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.3rem;
     margin-bottom: 1rem;
 }
 
 .price {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 800;
     color: #059669;
 }
 
 .price-period {
-    font-size: 0.75rem;
     color: #64748b;
+    font-size: 0.8rem;
 }
 
 /* BUTTON */
 .service-card .btn {
     width: 100%;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    padding: 10px;
+    border-radius: 12px;
     font-weight: 600;
     transition: 0.3s;
 }
 
-/* button hover */
 .service-card .btn:hover {
-    transform: scale(1.04);
-}
-
-/* SMALL EXTRA EFFECT */
-.service-card::after {
-    content: "";
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    background: rgba(16,185,129,0.08);
-    border-radius: 50%;
-    top: -40px;
-    right: -40px;
-    transition: 0.4s;
-}
-
-.service-card:hover::after {
-    transform: scale(1.3);
+    transform: scale(1.05);
 }
         /* ==================== PROCESS SECTION ==================== */
         .process {
