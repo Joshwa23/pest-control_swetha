@@ -1316,43 +1316,36 @@
 .video-section {
     background: var(--gray-50);
 }
-
+/* VIDEO SECTION FIX */
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 20px;
 }
 
 .video-card {
     background: white;
-    border-radius: 16px;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: var(--shadow);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     transition: 0.3s;
 }
 
 .video-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-2xl);
+    transform: translateY(-5px);
 }
 
-.video-card iframe {
+/* IMPORTANT FIX */
+.video-card video {
     width: 100%;
-    height: 200px;
-    border: none;
+    height: 200px;       /* FIXED HEIGHT */
+    object-fit: cover;   /* PREVENT STRETCH */
+    display: block;
 }
 
 .video-card h3 {
-    padding: 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-}
- .video-card iframe {
-    transition: transform 0.4s ease;
-}
-
-.video-card:hover iframe {
-    transform: scale(1.05);
+    padding: 15px;
+    font-size: 16px;
 }
     </style>
 </head>
@@ -1829,35 +1822,47 @@
             </p>
         </div>
 
- <div class="video-grid">
+<div class="video-grid">
 
     <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/tz3x5K0m1n8" allowfullscreen></iframe>
+        <video controls muted loop poster="https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
+        </video>
         <h3>Termite Treatment Process</h3>
     </div>
 
     <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/Bu2k9kQd5n0" allowfullscreen></iframe>
+        <video controls muted loop poster="https://images.pexels.com/photos/6195126/pexels-photo-6195126.jpeg">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4">
+        </video>
         <h3>Cockroach Control Spray</h3>
     </div>
 
     <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/2JaYp4Q0M7E" allowfullscreen></iframe>
+        <video controls muted loop poster="https://images.pexels.com/photos/4239031/pexels-photo-4239031.jpeg">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-15s.mp4" type="video/mp4">
+        </video>
         <h3>Bed Bug Removal</h3>
     </div>
 
     <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/9z6XJpQ8G2A" allowfullscreen></iframe>
+        <video controls muted loop poster="https://images.pexels.com/photos/6872580/pexels-photo-6872580.jpeg">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-20s.mp4" type="video/mp4">
+        </video>
         <h3>Rodent Control Service</h3>
     </div>
 
     <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/dzWb7K2p0Y0" allowfullscreen></iframe>
+        <video controls muted loop poster="https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-30s.mp4" type="video/mp4">
+        </video>
         <h3>Mosquito Fogging</h3>
     </div>
 
     <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/5XkRZ7h1q1M" allowfullscreen></iframe>
+        <video controls muted loop poster="https://images.pexels.com/photos/6195291/pexels-photo-6195291.jpeg">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-5mb.mp4" type="video/mp4">
+        </video>
         <h3>Full Home Pest Cleaning</h3>
     </div>
 
